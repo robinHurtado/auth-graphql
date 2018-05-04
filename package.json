@@ -1,16 +1,16 @@
 {
-  "name": "users",
+  "name": "auth-graphql-starter",
   "version": "1.0.0",
   "description": "Starter pack for an auth-included graphql project",
   "repository": {
     "type": "git",
-    "url": "github.com/stephengrider"
+    "url": "https://github.com/robinHurtado/auth-graphql"
   },
   "main": "index.js",
   "scripts": {
     "dev": "nodemon index.js --ignore client"
   },
-  "author": "",
+  "author": "Robin Hurtado",
   "license": "ISC",
   "dependencies": {
     "apollo-client": "^0.8.2",
@@ -38,5 +38,8 @@
     "react-router": "^3.0.2",
     "webpack": "^2.2.0",
     "webpack-dev-middleware": "^1.9.0"
+  },
+  "devDependencies": {
+    "nodemon": "^1.17.3"
   }
 }

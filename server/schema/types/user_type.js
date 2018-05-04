@@ -11,4 +11,4 @@ const UserType = new GraphQLObjectType({
   }
 });
 
-modules.exports = UserType;
+module.exports = UserType;
