@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import ApolloClient from 'apollo-client'; // interacts with the backend
+import ApolloClient, { createNetworkInterface } from 'apollo-client'; // interacts with the backend
 import { ApolloProvider } from 'react-apollo'; // glue layer between apollo and react
 import { Router, Route, IndexRoute } from 'react-router';
 import  createBrowserHistory  from 'history/createBrowserHistory';
@@ -8,8 +8,17 @@ import  createBrowserHistory  from 'history/createBrowserHistory';
 import App from './components/App';
 
 const history = createBrowserHistory();
-console.log(history)
+
+// check the apollo api docs to understand this
+const networkInterface = createNetworkInterface({
+  uri: '/graphql',
+  opts: {
+    credentials: 'same-origin'
+  }
+});
+
 const client = new ApolloClient({
+  networkInterface,
   dataIdFromObject: o => o.id
 });
 
