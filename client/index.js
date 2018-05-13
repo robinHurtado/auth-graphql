@@ -6,6 +6,7 @@ import { Router, Route, IndexRoute } from 'react-router';
 import  createBrowserHistory  from 'history/createBrowserHistory';
 
 import App from './components/App';
+import LoginForm from './components/LoginForm';
 
 const history = createBrowserHistory();
 
@@ -26,7 +27,8 @@ const Root = () => {
   return (
     <ApolloProvider client={client}>
       <Router history={history}>
-        <Route path="/" component={App}>
+        <Route  path="/" component={App}>
+          <IndexRoute component={LoginForm} />
         </Route>
       </Router>
     </ApolloProvider>

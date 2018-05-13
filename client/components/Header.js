@@ -1,19 +1,10 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
-import { Redirect } from 'react-router';
 
 import query from '../queries/CurrentUser';
 import mutation from '../mutations/Logout';
 
 class Header extends Component {
-  constructor(){
-    super();
-    this.state = {
-      home: false,
-      signup: false,
-      login: false
-    }
-  }
 
   onLogoutClick(){
     this.props.mutate({
@@ -32,25 +23,21 @@ class Header extends Component {
     if (user) {
       return(
         <div>
-          <li><a onClick={() => this.onLogoutClick.bind(this)}>Logout</a></li>
+          <li><a onClick={this.onLogoutClick.bind(this)}>Logout</a></li>
         </div>
       );
     } else {
       return(
         <div>
           <li>
-            <a onClick={() => this.redirect('signup')}>Signup</a>
+            <a onClick={() =>  this.props.history.push('/signup')}>Signup</a>
           </li>
           <li>
-            <a onClick={() => this.redirect('login')}>Login</a>
+            <a onClick={() => this.props.history.push('/login')}>Login</a>
           </li>
         </div>
       );
     }
-  }
-
-  redirect(page){
-    this.setState({[page]: true});
   }
 
   render() {
@@ -60,7 +47,7 @@ class Header extends Component {
           <a
             className="brand-logo left"
             style={{cursor: 'pointer'}}
-            onClick={() => this.redirect('home')}
+            onClick={() => this.props.history.push('/')}
           >
             Home
           </a>
@@ -68,9 +55,6 @@ class Header extends Component {
             {this.renderButtons()}
           </ul>
         </div>
-        {this.state.home && (<Redirect to="/" push />)}
-        {this.state.signup && (<Redirect to="/signup" push />)}
-        {this.state.login && (<Redirect to="/login" push />)}
       </nav>
     );
   }
