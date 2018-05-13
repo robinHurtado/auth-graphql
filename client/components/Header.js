@@ -3,6 +3,7 @@ import { graphql } from 'react-apollo';
 import { Redirect } from 'react-router';
 
 import query from '../queries/CurrentUser';
+import mutation from '../mutations/Logout';
 
 class Header extends Component {
   constructor(){
@@ -14,6 +15,13 @@ class Header extends Component {
     }
   }
 
+  onLogoutClick(){
+    this.props.mutate({
+      refetchQueries: [{ query }]
+    });
+  }
+
+
   renderButtons(){
     const { loading, user } = this.props.data;
 
@@ -22,15 +30,19 @@ class Header extends Component {
     }
 
     if (user) {
-      return <div>Logout</div>;
+      return(
+        <div>
+          <li><a onClick={() => this.onLogoutClick.bind(this)}>Logout</a></li>
+        </div>
+      );
     } else {
       return(
         <div>
           <li>
-            <span style={{cursor: 'pointer'}} onClick={() => this.redirect('signup')}>Signup-</span>
+            <a onClick={() => this.redirect('signup')}>Signup</a>
           </li>
           <li>
-            <span style={{cursor: 'pointer'}} onClick={() => this.redirect('login')}>Login</span>
+            <a onClick={() => this.redirect('login')}>Login</a>
           </li>
         </div>
       );
@@ -45,13 +57,13 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <span
+          <a
             className="brand-logo left"
             style={{cursor: 'pointer'}}
             onClick={() => this.redirect('home')}
           >
             Home
-          </span>
+          </a>
           <ul className="right">
             {this.renderButtons()}
           </ul>
@@ -64,4 +76,7 @@ class Header extends Component {
   }
 }
 
-export default graphql(query)(Header);
+// graphql just recive one thing by time so that is why
+export default graphql(mutation)(
+  graphql(query)(Header)
+);
