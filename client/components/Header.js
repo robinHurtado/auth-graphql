@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { graphql } from 'react-apollo';
+import { Link } from 'react-router';
 
 import query from '../queries/CurrentUser';
 import mutation from '../mutations/Logout';
@@ -22,18 +23,16 @@ class Header extends Component {
 
     if (user) {
       return(
-        <div>
-          <li><a onClick={this.onLogoutClick.bind(this)}>Logout</a></li>
-        </div>
+        <li><a onClick={this.onLogoutClick.bind(this)}>Logout</a></li>
       );
     } else {
       return(
         <div>
           <li>
-            <a onClick={() =>  this.props.history.push('/signup')}>Signup</a>
+            <Link to='/signup'>Signup</Link>
           </li>
           <li>
-            <a onClick={() => this.props.history.push('/login')}>Login</a>
+            <Link to='/login'>Login</Link>
           </li>
         </div>
       );
@@ -44,13 +43,9 @@ class Header extends Component {
     return (
       <nav>
         <div className="nav-wrapper">
-          <a
-            className="brand-logo left"
-            style={{cursor: 'pointer'}}
-            onClick={() => this.props.history.push('/')}
-          >
+          <Link to='/' className="brand-logo left">
             Home
-          </a>
+          </Link>
           <ul className="right">
             {this.renderButtons()}
           </ul>
@@ -60,7 +55,7 @@ class Header extends Component {
   }
 }
 
-// graphql just recive one thing by time so that is why
+// graphql just recive a single mutation or a single query at a time
 export default graphql(mutation)(
   graphql(query)(Header)
 );

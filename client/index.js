@@ -2,13 +2,12 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import ApolloClient, { createNetworkInterface } from 'apollo-client'; // interacts with the backend
 import { ApolloProvider } from 'react-apollo'; // glue layer between apollo and react
-import { Router, Route, IndexRoute } from 'react-router';
-import  createBrowserHistory  from 'history/createBrowserHistory';
-
+import { Router, Route, hashHistory, IndexRoute } from 'react-router';
+//import  createBrowserHistory  from 'history/createBrowserHistory';
 import App from './components/App';
 import LoginForm from './components/LoginForm';
 
-const history = createBrowserHistory();
+//const history = createBrowserHistory();
 
 // check the apollo api docs to understand this
 const networkInterface = createNetworkInterface({
@@ -26,9 +25,9 @@ const client = new ApolloClient({
 const Root = () => {
   return (
     <ApolloProvider client={client}>
-      <Router history={history}>
+      <Router history={hashHistory}>
         <Route  path="/" component={App}>
-          <IndexRoute component={LoginForm} />
+          <Route path="login" component={LoginForm} />
         </Route>
       </Router>
     </ApolloProvider>
