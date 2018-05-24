@@ -11,7 +11,8 @@ const schema = require('./schema/schema');
 // Create a new Express application
 const app = express();
 
-const MONGO_URI = 'mongodb://localhost:27017/auth';
+// mongodb://localhost:27017/auth
+const MONGO_URI = 'mongodb://robin:password@ds133570.mlab.com:33570/auth';
 
 // Mongoose's built in promise library is deprecated, replace it with ES2015 Promise
 mongoose.Promise = global.Promise;
