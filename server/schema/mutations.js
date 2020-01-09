@@ -22,7 +22,7 @@ const mutation = new GraphQLObjectType({
     },
     logout: {
       type: UserType,
-      resolve(parentValues, args, req) {
+      resolve(_, __, req) {
         const { user } = req; // comes with the password.js
         req.logout(); // func that log out the user, comes with password.js
         return user;
@@ -34,7 +34,7 @@ const mutation = new GraphQLObjectType({
         email: { type: GraphQLString },
         password: { type: GraphQLString }
       },
-      resolve(parentValues, { email, password }, req){
+      resolve(_, { email, password }, req){
         return AuthService.login({ email, password, req });
       }
 

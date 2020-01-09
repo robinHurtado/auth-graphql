@@ -7,7 +7,7 @@ const RootQueryType = new GraphQLObjectType({
   fields: {
     user: {
       type: UserType,
-      resolve(parentValue, args, req){
+      resolve(_, __, req){
         return req.user; // comes in password.js if it is null then there's not user authentication
       }
     }
